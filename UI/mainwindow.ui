@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>PGbackuper</class>
+ <widget class="QMainWindow" name="PGbackuper">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>762</width>
+    <height>371</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <widget class="QTableWidget" name="TaskTable">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>10</y>
+      <width>731</width>
+      <height>261</height>
+     </rect>
+    </property>
+    <column>
+     <property name="text">
+      <string>ID</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>NameTask</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>Schedule</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>Activ</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>ComandLine</string>
+     </property>
+    </column>
+   </widget>
+   <widget class="QPushButton" name="CreateTask">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>290</y>
+      <width>111</width>
+      <height>24</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Создать</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="ActiveTask">
+    <property name="geometry">
+     <rect>
+      <x>340</x>
+      <y>290</y>
+      <width>91</width>
+      <height>24</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Включить</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="DeactivTask">
+    <property name="geometry">
+     <rect>
+      <x>440</x>
+      <y>290</y>
+      <width>91</width>
+      <height>24</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Отключить</string>
+    </property>
+   </widget>
+   <widget class="QCheckBox" name="HideDeactiv">
+    <property name="geometry">
+     <rect>
+      <x>600</x>
+      <y>290</y>
+      <width>151</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Скрыть отключенные</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="DeleteTask">
+    <property name="geometry">
+     <rect>
+      <x>140</x>
+      <y>290</y>
+      <width>111</width>
+      <height>24</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Удалить</string>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>762</width>
+     <height>22</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menu">
+    <property name="title">
+     <string>Файл</string>
+    </property>
+    <addaction name="Settings"/>
+    <addaction name="separator"/>
+    <addaction name="QuitProgramm"/>
+   </widget>
+   <widget class="QMenu" name="menu_2">
+    <property name="title">
+     <string>Помощь</string>
+    </property>
+    <addaction name="AbautProgramm"/>
+   </widget>
+   <addaction name="menu"/>
+   <addaction name="menu_2"/>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+  <action name="Settings">
+   <property name="text">
+    <string>Настройки...</string>
+   </property>
+  </action>
+  <action name="QuitProgramm">
+   <property name="text">
+    <string>Выход</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+Q</string>
+   </property>
+  </action>
+  <action name="AbautProgramm">
+   <property name="text">
+    <string>О программе</string>
+   </property>
+  </action>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

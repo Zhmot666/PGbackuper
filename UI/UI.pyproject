@@ -1,0 +1,7 @@
+{
+    "files": [
+        "NewTask.ui",
+        "main.py",
+        "mainwindow.ui"
+    ]
+}
