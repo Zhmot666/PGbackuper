@@ -1,0 +1,12 @@
+CREATE TABLE IF NOT EXISTS "TaskParametrs" (
+	"ID_Task"	INTEGER NOT NULL,
+	"prefix_file"	TEXT NOT NULL,
+	"time"	TEXT NOT NULL,
+	"server_address"	TEXT NOT NULL,
+	"server_port"	REAL NOT NULL,
+	"db_name"	TEXT NOT NULL,
+	"user_name"	TEXT NOT NULL,
+	"type_backup"	INTEGER NOT NULL,
+	"path_backup"	TEXT NOT NULL,
+	FOREIGN KEY("ID_Task") REFERENCES "TaskList"("ID")
+);

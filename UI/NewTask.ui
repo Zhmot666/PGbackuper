@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>729</width>
-    <height>470</height>
+    <height>460</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -62,8 +62,8 @@
   <widget class="QLabel" name="LabelName">
    <property name="geometry">
     <rect>
-     <x>8</x>
-     <y>90</y>
+     <x>38</x>
+     <y>60</y>
      <width>101</width>
      <height>20</height>
     </rect>
@@ -75,9 +75,9 @@
   <widget class="QLineEdit" name="NameTask">
    <property name="geometry">
     <rect>
-     <x>140</x>
-     <y>90</y>
-     <width>381</width>
+     <x>170</x>
+     <y>60</y>
+     <width>211</width>
      <height>22</height>
     </rect>
    </property>
@@ -86,7 +86,7 @@
    <property name="geometry">
     <rect>
      <x>8</x>
-     <y>320</y>
+     <y>390</y>
      <width>111</width>
      <height>20</height>
     </rect>
@@ -96,10 +96,13 @@
    </property>
   </widget>
   <widget class="QLineEdit" name="CmdTask">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="geometry">
     <rect>
      <x>140</x>
-     <y>320</y>
+     <y>390</y>
      <width>381</width>
      <height>22</height>
     </rect>
@@ -109,13 +112,246 @@
    <property name="geometry">
     <rect>
      <x>540</x>
-     <y>320</y>
+     <y>390</y>
      <width>101</width>
      <height>24</height>
     </rect>
    </property>
    <property name="text">
     <string>Генерировать</string>
+   </property>
+  </widget>
+  <widget class="QGroupBox" name="GroupConnectSettings">
+   <property name="geometry">
+    <rect>
+     <x>30</x>
+     <y>90</y>
+     <width>621</width>
+     <height>91</height>
+    </rect>
+   </property>
+   <property name="title">
+    <string>Параметры подключения к БД</string>
+   </property>
+   <widget class="QLineEdit" name="ServerAdress">
+    <property name="geometry">
+     <rect>
+      <x>120</x>
+      <y>20</y>
+      <width>161</width>
+      <height>22</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLabel" name="LabelServerAdress">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>20</y>
+      <width>91</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Адрес сервера</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="LabelServerPort">
+    <property name="geometry">
+     <rect>
+      <x>310</x>
+      <y>20</y>
+      <width>91</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Порт сервера</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="ServerPort">
+    <property name="geometry">
+     <rect>
+      <x>420</x>
+      <y>20</y>
+      <width>161</width>
+      <height>22</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLabel" name="LabelDataBaseName">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>50</y>
+      <width>101</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Имя базы данных</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="DataBaseName">
+    <property name="geometry">
+     <rect>
+      <x>120</x>
+      <y>50</y>
+      <width>161</width>
+      <height>22</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="UserName">
+    <property name="geometry">
+     <rect>
+      <x>420</x>
+      <y>50</y>
+      <width>161</width>
+      <height>22</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLabel" name="LabelUserName">
+    <property name="geometry">
+     <rect>
+      <x>310</x>
+      <y>50</y>
+      <width>91</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Пользователь</string>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QGroupBox" name="GroupFormat">
+   <property name="geometry">
+    <rect>
+     <x>30</x>
+     <y>190</y>
+     <width>621</width>
+     <height>111</height>
+    </rect>
+   </property>
+   <property name="title">
+    <string>Формат выгрузки</string>
+   </property>
+   <widget class="QRadioButton" name="TextFile">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>20</y>
+      <width>191</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Текстовый файл (SQL-скрипт)</string>
+    </property>
+   </widget>
+   <widget class="QRadioButton" name="Arhiv">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>40</y>
+      <width>89</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Архив</string>
+    </property>
+   </widget>
+   <widget class="QRadioButton" name="Folder">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>60</y>
+      <width>89</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Директория</string>
+    </property>
+   </widget>
+   <widget class="QRadioButton" name="TarArhiv">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>80</y>
+      <width>89</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>tar-формат</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="ChangedTextFile">
+    <property name="geometry">
+     <rect>
+      <x>220</x>
+      <y>20</y>
+      <width>113</width>
+      <height>22</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="ChangedArhiv">
+    <property name="geometry">
+     <rect>
+      <x>220</x>
+      <y>40</y>
+      <width>113</width>
+      <height>22</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="ChangedFolder">
+    <property name="geometry">
+     <rect>
+      <x>220</x>
+      <y>60</y>
+      <width>113</width>
+      <height>22</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="ChangedTarArhiv">
+    <property name="geometry">
+     <rect>
+      <x>220</x>
+      <y>80</y>
+      <width>113</width>
+      <height>22</height>
+     </rect>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QTimeEdit" name="TimeStart">
+   <property name="geometry">
+    <rect>
+     <x>520</x>
+     <y>60</y>
+     <width>118</width>
+     <height>22</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label">
+   <property name="geometry">
+    <rect>
+     <x>410</x>
+     <y>60</y>
+     <width>101</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Время запуска</string>
    </property>
   </widget>
  </widget>
@@ -150,6 +386,262 @@
     <hint type="destinationlabel">
      <x>286</x>
      <y>274</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>Arhiv</sender>
+   <signal>clicked()</signal>
+   <receiver>ChangedTextFile</receiver>
+   <slot>hide()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>84</x>
+     <y>239</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>306</x>
+     <y>220</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>Arhiv</sender>
+   <signal>clicked()</signal>
+   <receiver>ChangedTarArhiv</receiver>
+   <slot>hide()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>84</x>
+     <y>239</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>306</x>
+     <y>280</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>Arhiv</sender>
+   <signal>clicked()</signal>
+   <receiver>ChangedFolder</receiver>
+   <slot>hide()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>84</x>
+     <y>239</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>306</x>
+     <y>260</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>TextFile</sender>
+   <signal>clicked()</signal>
+   <receiver>ChangedArhiv</receiver>
+   <slot>hide()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>135</x>
+     <y>219</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>306</x>
+     <y>240</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>Arhiv</sender>
+   <signal>clicked()</signal>
+   <receiver>ChangedArhiv</receiver>
+   <slot>show()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>84</x>
+     <y>239</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>306</x>
+     <y>240</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>TextFile</sender>
+   <signal>clicked()</signal>
+   <receiver>ChangedTextFile</receiver>
+   <slot>show()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>135</x>
+     <y>219</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>306</x>
+     <y>220</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>TextFile</sender>
+   <signal>clicked()</signal>
+   <receiver>ChangedTarArhiv</receiver>
+   <slot>hide()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>135</x>
+     <y>219</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>306</x>
+     <y>280</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>TextFile</sender>
+   <signal>clicked()</signal>
+   <receiver>ChangedFolder</receiver>
+   <slot>hide()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>135</x>
+     <y>219</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>306</x>
+     <y>260</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>Folder</sender>
+   <signal>clicked()</signal>
+   <receiver>ChangedFolder</receiver>
+   <slot>show()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>84</x>
+     <y>259</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>306</x>
+     <y>260</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>Folder</sender>
+   <signal>clicked()</signal>
+   <receiver>ChangedTextFile</receiver>
+   <slot>hide()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>84</x>
+     <y>259</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>306</x>
+     <y>220</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>Folder</sender>
+   <signal>clicked()</signal>
+   <receiver>ChangedTarArhiv</receiver>
+   <slot>hide()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>84</x>
+     <y>259</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>306</x>
+     <y>280</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>Folder</sender>
+   <signal>clicked()</signal>
+   <receiver>ChangedArhiv</receiver>
+   <slot>hide()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>84</x>
+     <y>259</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>306</x>
+     <y>240</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>TarArhiv</sender>
+   <signal>clicked()</signal>
+   <receiver>ChangedTarArhiv</receiver>
+   <slot>show()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>84</x>
+     <y>279</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>306</x>
+     <y>280</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>TarArhiv</sender>
+   <signal>clicked()</signal>
+   <receiver>ChangedTextFile</receiver>
+   <slot>hide()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>84</x>
+     <y>279</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>306</x>
+     <y>220</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>TarArhiv</sender>
+   <signal>clicked()</signal>
+   <receiver>ChangedArhiv</receiver>
+   <slot>hide()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>84</x>
+     <y>279</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>306</x>
+     <y>240</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>TarArhiv</sender>
+   <signal>clicked()</signal>
+   <receiver>ChangedFolder</receiver>
+   <slot>hide()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>84</x>
+     <y>279</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>306</x>
+     <y>260</y>
     </hint>
    </hints>
   </connection>

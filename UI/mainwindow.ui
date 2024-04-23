@@ -30,26 +30,26 @@
     </column>
     <column>
      <property name="text">
-      <string>NameTask</string>
+      <string>Наименование задачи</string>
      </property>
     </column>
     <column>
      <property name="text">
-      <string>Schedule</string>
+      <string>Расписание</string>
      </property>
     </column>
     <column>
      <property name="text">
-      <string>Activ</string>
+      <string>Активно</string>
      </property>
     </column>
     <column>
      <property name="text">
-      <string>ComandLine</string>
+      <string>Командная строка</string>
      </property>
     </column>
    </widget>
-   <widget class="QPushButton" name="CreateTask">
+   <widget class="QPushButton" name="CreateTaskButton">
     <property name="geometry">
      <rect>
       <x>20</x>
@@ -62,7 +62,7 @@
      <string>Создать</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="ActiveTask">
+   <widget class="QPushButton" name="ActiveTaskButton">
     <property name="geometry">
      <rect>
       <x>340</x>
@@ -75,7 +75,7 @@
      <string>Включить</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="DeactivTask">
+   <widget class="QPushButton" name="DeactivTaskButton">
     <property name="geometry">
      <rect>
       <x>440</x>
@@ -88,7 +88,7 @@
      <string>Отключить</string>
     </property>
    </widget>
-   <widget class="QCheckBox" name="HideDeactiv">
+   <widget class="QCheckBox" name="HideDeactivChckBox">
     <property name="geometry">
      <rect>
       <x>600</x>
@@ -101,7 +101,7 @@
      <string>Скрыть отключенные</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="DeleteTask">
+   <widget class="QPushButton" name="DeleteTaskButton">
     <property name="geometry">
      <rect>
       <x>140</x>
@@ -121,7 +121,7 @@
      <x>0</x>
      <y>0</y>
      <width>762</width>
-     <height>22</height>
+     <height>33</height>
     </rect>
    </property>
    <widget class="QMenu" name="menu">
