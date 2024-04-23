@@ -7,7 +7,7 @@ class DataDB:
     __CREATE_TABLE_SCRIPTS2 = open('SQLScripts/create_TaskParameters.txt').read()
     __CREATE_TABLE_SCRIPTS3 = open('SQLScripts/create_Schedule.txt').read()
     __GET_LIST_OF_TASKS = open('SQLScripts/get_list_of_tasks.txt').read()
-
+    __DELETE_TASKS = open('SQLScripts/delete_tasks.txt').read()
 
     def __init__(self):
         self.__cursor = self.__CONNECTION.cursor()
@@ -29,8 +29,9 @@ class DataDB:
     def deactivate_task(self):
         pass
 
-    def delete_task(self):
-        pass
+    def delete_task(self, id_task):
+        with self.__CONNECTION as self.sql:
+            self.sql.execute(self.__DELETE_TASKS, (id_task,))
 
     def get_list_of_tasks(self, active_only=True):
         active = 'Неактивно' if active_only else ''
