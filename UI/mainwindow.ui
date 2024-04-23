@@ -54,7 +54,7 @@
      <rect>
       <x>20</x>
       <y>290</y>
-      <width>111</width>
+      <width>91</width>
       <height>24</height>
      </rect>
     </property>
@@ -65,7 +65,7 @@
    <widget class="QPushButton" name="ActiveTaskButton">
     <property name="geometry">
      <rect>
-      <x>340</x>
+      <x>400</x>
       <y>290</y>
       <width>91</width>
       <height>24</height>
@@ -78,7 +78,7 @@
    <widget class="QPushButton" name="DeactivTaskButton">
     <property name="geometry">
      <rect>
-      <x>440</x>
+      <x>500</x>
       <y>290</y>
       <width>91</width>
       <height>24</height>
@@ -88,13 +88,13 @@
      <string>Отключить</string>
     </property>
    </widget>
-   <widget class="QCheckBox" name="HideDeactivChckBox">
+   <widget class="QCheckBox" name="HideDeactivCheckBox">
     <property name="geometry">
      <rect>
       <x>600</x>
       <y>290</y>
       <width>151</width>
-      <height>20</height>
+      <height>21</height>
      </rect>
     </property>
     <property name="text">
@@ -104,14 +104,27 @@
    <widget class="QPushButton" name="DeleteTaskButton">
     <property name="geometry">
      <rect>
-      <x>140</x>
+      <x>220</x>
       <y>290</y>
-      <width>111</width>
+      <width>91</width>
       <height>24</height>
      </rect>
     </property>
     <property name="text">
      <string>Удалить</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="EditTaskButton">
+    <property name="geometry">
+     <rect>
+      <x>110</x>
+      <y>290</y>
+      <width>91</width>
+      <height>24</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Изменить</string>
     </property>
    </widget>
   </widget>
@@ -121,7 +134,7 @@
      <x>0</x>
      <y>0</y>
      <width>762</width>
-     <height>33</height>
+     <height>22</height>
     </rect>
    </property>
    <widget class="QMenu" name="menu">
