@@ -8,6 +8,8 @@ class DataDB:
     __CREATE_TABLE_SCRIPTS3 = open('SQLScripts/create_Schedule.txt').read()
     __GET_LIST_OF_TASKS = open('SQLScripts/get_list_of_tasks.txt').read()
     __DELETE_TASKS = open('SQLScripts/delete_tasks.txt').read()
+    __ACTIVATE_TASKS = open('SQLScripts/activate_tasks.txt').read()
+    __DEACTIVATE_TASKS = open('SQLScripts/deactivate_tasks.txt').read()
 
     def __init__(self):
         self.__cursor = self.__CONNECTION.cursor()
@@ -23,11 +25,13 @@ class DataDB:
     def add_new_task(self):
         pass
 
-    def activate_task(self):
-        pass
+    def activate_task(self, id_task):
+        with self.__CONNECTION as self.sql:
+            self.sql.execute(self.__ACTIVATE_TASKS, (id_task,))
 
-    def deactivate_task(self):
-        pass
+    def deactivate_task(self, id_task):
+        with self.__CONNECTION as self.sql:
+            self.sql.execute(self.__DEACTIVATE_TASKS, (id_task,))
 
     def delete_task(self, id_task):
         with self.__CONNECTION as self.sql:
