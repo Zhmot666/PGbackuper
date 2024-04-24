@@ -1,1 +1,1 @@
-SELECT * FROM TaskList WHERE Deleted <> 'Удалено' AND Active <> ?
+SELECT * FROM TaskList WHERE Deleted <> ? AND Active <> ?

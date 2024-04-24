@@ -1,1 +1,1 @@
-UPDATE TaskList SET Active = 'Неактивно' WHERE ID = ?;
+UPDATE TaskList SET Active = ? WHERE ID = ?;

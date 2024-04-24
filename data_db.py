@@ -27,20 +27,20 @@ class DataDB:
 
     def activate_task(self, id_task):
         with self.__CONNECTION as self.sql:
-            self.sql.execute(self.__ACTIVATE_TASKS, (id_task,))
+            self.sql.execute(self.__ACTIVATE_TASKS, ('Активно', id_task))
 
     def deactivate_task(self, id_task):
         with self.__CONNECTION as self.sql:
-            self.sql.execute(self.__DEACTIVATE_TASKS, (id_task,))
+            self.sql.execute(self.__DEACTIVATE_TASKS, ('Неактивно', id_task))
 
     def delete_task(self, id_task):
         with self.__CONNECTION as self.sql:
-            self.sql.execute(self.__DELETE_TASKS, (id_task,))
+            self.sql.execute(self.__DELETE_TASKS, ('Удалено', id_task))
 
     def get_list_of_tasks(self, active_only=True):
         active = 'Неактивно' if active_only else ''
         with self.__CONNECTION as self.sql:
-            result = self.sql.execute(self.__GET_LIST_OF_TASKS, (active,))
+            result = self.sql.execute(self.__GET_LIST_OF_TASKS, ('Удалено', active))
             return result.fetchall()
 
     def get_task_parameters(self):
