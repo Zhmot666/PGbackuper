@@ -16,9 +16,9 @@
   <widget class="QLabel" name="Label_NewTask">
    <property name="geometry">
     <rect>
-     <x>300</x>
+     <x>260</x>
      <y>20</y>
-     <width>161</width>
+     <width>201</width>
      <height>31</height>
     </rect>
    </property>
@@ -92,7 +92,7 @@
     </rect>
    </property>
   </widget>
-  <widget class="QPushButton" name="PushButtonGenerator">
+  <widget class="QPushButton" name="GeneratorButton">
    <property name="geometry">
     <rect>
      <x>560</x>
@@ -368,6 +368,16 @@
    </property>
    <property name="text">
     <string>Отмена</string>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="Task_id_hide">
+   <property name="geometry">
+    <rect>
+     <x>60</x>
+     <y>20</y>
+     <width>21</width>
+     <height>22</height>
+    </rect>
    </property>
   </widget>
  </widget>

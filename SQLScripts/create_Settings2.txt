@@ -1,1 +1,1 @@
-INSERT INTO "Settings" (pg_path, ID_setting) VALUES ('', 1);
+INSERT INTO "Settings" (ID_setting, pg_path) VALUES (1, '');

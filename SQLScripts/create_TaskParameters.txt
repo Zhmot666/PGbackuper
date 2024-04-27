@@ -1,4 +1,4 @@
-CREATE TABLE IF NOT EXISTS "TaskParametrs" (
+CREATE TABLE IF NOT EXISTS "TaskParameters" (
 	"ID_Task"	INTEGER NOT NULL,
 	"prefix_file"	TEXT NOT NULL,
 	"time"	TEXT NOT NULL,

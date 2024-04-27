@@ -2,7 +2,7 @@ from PyQt5 import uic, QtWidgets
 from PyQt5.QtCore import Qt, QTimer
 from PyQt5.QtGui import QIcon
 from PyQt5.QtWidgets import QSystemTrayIcon, QMenu, QAction
-from NewTask import NewTaskDialog
+from NewTask import NewTaskDialog, EditTaskDialog
 from Settings import SettingsWindow
 import data_db
 
@@ -24,6 +24,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.ActiveTaskButton.clicked.connect(self.activate_task)
         self.DeactivTaskButton.clicked.connect(self.deactivate_task)
         self.TaskTable.doubleClicked.connect(self.edit_task)
+        self.EditTaskButton.clicked.connect(self.edit_task)
         self.PushButtonSettings.clicked.connect(self.program_settings)
 
         # Таймер для проверки задач
@@ -82,7 +83,12 @@ class MainWindow(QtWidgets.QMainWindow):
         # self.refresh_list()
 
     def edit_task(self):
-        pass
+        if self.check_selected_task():
+            row = self.TaskTable.currentRow()
+            id_task = self.TaskTable.item(row, 0).text()
+            dialog_edit_task = EditTaskDialog(self.db, id_task)
+            dialog_edit_task.exec_()
+            self.refresh_list()
 
     def activate_task(self):
         if self.check_selected_task():

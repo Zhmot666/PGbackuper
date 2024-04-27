@@ -1,4 +1,4 @@
-INSERT INTO "TaskParametrs"
+INSERT INTO "TaskParameters"
     ("ID_Task",
         "prefix_file",
         "time",

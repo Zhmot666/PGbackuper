@@ -1,0 +1,4 @@
+SELECT TaskList.Name_Task, TaskParameters.*
+FROM TaskParameters
+JOIN TaskList ON TaskParameters.ID_Task = TaskList.ID
+WHERE TaskParameters.ID_Task = ?;

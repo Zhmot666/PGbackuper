@@ -19,7 +19,7 @@ class SettingsWindow(QtWidgets.QDialog):
     def init_ui(self):
 
         settings = self.db_settings.get_settings()
-        self.PGDumpPath.setText(settings[1])
+        self.PGDumpPath.setText(str(settings[1]))
 
     def save_button(self):
         settings_dict = dict()

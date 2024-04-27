@@ -1,0 +1,10 @@
+UPDATE "TaskParameters"
+SET db_name = ?,
+    path_backup = ?,
+    prefix_file = ?,
+    server_address = ?,
+    server_port = ?,
+    "time" = ?,
+    type_backup = ?,
+    user_name = ?
+WHERE "ID_Task" = ?;

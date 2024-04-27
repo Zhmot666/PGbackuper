@@ -16,6 +16,9 @@ class DataDB:
     __DEACTIVATE_TASKS = open('SQLScripts/deactivate_tasks.txt').read()
     __GET_SETTINGS = open('SQLScripts/get_settings.txt').read()
     __SET_SETTINGS = open('SQLScripts/set_settings.txt').read()
+    __GET_TASK_PARAMETERS = open('SQLScripts/get_task_parameters.txt').read()
+    __EDIT_TASK = open('SQLScripts/edit_task.txt').read()
+    __EDIT_TASK_PARAMETERS = open('SQLScripts/edit_task_parameters.txt').read()
 
     def __init__(self):
         self.__cursor = self.__CONNECTION.cursor()
@@ -23,7 +26,7 @@ class DataDB:
         self.__cursor.executescript(self.__CREATE_TABLE_SCRIPTS2)
         self.__cursor.executescript(self.__CREATE_TABLE_SCRIPTS3)
         self.__cursor.executescript(self.__CREATE_TABLE_SCRIPTS4)
-        self.__cursor.executescript(self.__CREATE_TABLE_SCRIPTS4)
+        self.__cursor.executescript(self.__CREATE_TABLE_SCRIPTS5)
         self.__CONNECTION.commit()
 
     def __del__(self):
@@ -57,8 +60,10 @@ class DataDB:
             result = self.sql.execute(self.__GET_LIST_OF_TASKS, ('Удалено', active))
             return result.fetchall()
 
-    def get_task_parameters(self):
-        pass
+    def get_task_parameters(self, id_task):
+        with self.__CONNECTION as self.sql:
+            result = self.sql.execute(self.__GET_TASK_PARAMETERS, (int(id_task),))
+            return result.fetchone()
 
     def get_schedule(self):
         pass
@@ -72,3 +77,13 @@ class DataDB:
         with self.__CONNECTION as self.sql:
             self.sql.execute(self.__SET_SETTINGS, (settings['pg_path'],))
             return
+
+    def edit_task_parameters(self, **parameters_task):
+        with self.__CONNECTION as self.sql:
+            self.sql.execute(self.__EDIT_TASK, (parameters_task['name'], parameters_task['id']))
+        with self.__CONNECTION as self.sql:
+            self.sql.execute(self.__EDIT_TASK_PARAMETERS,
+                             (parameters_task['database_name'], parameters_task['path'], parameters_task['prefix'],
+                              parameters_task['server_address'], parameters_task['port'], parameters_task['time'],
+                              str(parameters_task['type_backup']), parameters_task['login'], parameters_task['id']))
+        return
