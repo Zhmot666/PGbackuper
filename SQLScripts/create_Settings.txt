@@ -1,0 +1,4 @@
+CREATE TABLE IF NOT EXISTS "Settings" (
+	"pg_path"	TEXT,
+	"ID_setting"	INTEGER NOT NULL
+);

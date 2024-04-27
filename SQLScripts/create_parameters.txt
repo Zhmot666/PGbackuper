@@ -1,0 +1,11 @@
+INSERT INTO "TaskParametrs"
+    ("ID_Task",
+        "prefix_file",
+        "time",
+        "server_address",
+        "server_port",
+        "db_name",
+        "user_name",
+        "type_backup",
+        "path_backup")
+VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);

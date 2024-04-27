@@ -1,0 +1,1 @@
+UPDATE "Settings" SET pg_path = ? WHERE ID_setting = 1;
