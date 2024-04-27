@@ -1,5 +1,9 @@
 from PyQt5 import uic, QtWidgets
+from PyQt5.QtCore import Qt, QTimer
+from PyQt5.QtGui import QIcon
+from PyQt5.QtWidgets import QSystemTrayIcon, QMenu, QAction
 from NewTask import NewTaskDialog
+from Settings import SettingsWindow
 import data_db
 
 
@@ -7,15 +11,42 @@ class MainWindow(QtWidgets.QMainWindow):
     def __init__(self):
         super(MainWindow, self).__init__()
         uic.loadUi("ui/MainWindow.ui", self)
+        self.dialog_setting = ''
+        self.setWindowTitle("PG_backupper")
+        self.setWindowIcon(QIcon("icon.png"))
         self.db = data_db.DataDB()
         self.refresh_list()
 
+        # Назначаем действия кнопкам
         self.CreateTaskButton.clicked.connect(self.create_task)
         self.DeleteTaskButton.clicked.connect(self.delete_task)
         self.HideDeactivCheckBox.clicked.connect(self.refresh_list)
         self.ActiveTaskButton.clicked.connect(self.activate_task)
         self.DeactivTaskButton.clicked.connect(self.deactivate_task)
         self.TaskTable.doubleClicked.connect(self.edit_task)
+        self.PushButtonSettings.clicked.connect(self.program_settings)
+
+        # Таймер для проверки задач
+        self.timer = QTimer()
+        self.timer.setInterval(60000)  # 60000 milliseconds = 1 minute
+        self.timer.timeout.connect(self.check_task)
+        self.timer.start()
+
+        # Сворачиваем в трей
+        # self.setWindowIcon(QIcon("icon.png"))
+        # self.trayIcon = QSystemTrayIcon(self)
+        # self.trayIcon.setIcon(QIcon("icon.png"))
+        # self.trayIcon.setToolTip("PG_backupper")
+        # self.trayMenu = QMenu()
+        # self.showAction = QAction("Show")
+        # self.showAction.triggered.connect(self.show)
+        # self.quitAction = QAction("Quit")
+        # self.quitAction.triggered.connect(self.close)
+        # self.trayMenu.addAction(self.showAction)
+        # self.trayMenu.addAction(self.quitAction)
+        # self.trayIcon.setContextMenu(self.trayMenu)
+        # self.trayIcon.show()
+        # self.setAttribute(Qt.WA_QuitOnClose, False)
 
     def delete_task(self):
         if self.check_selected_task():
@@ -41,8 +72,14 @@ class MainWindow(QtWidgets.QMainWindow):
                     self.refresh_list()
 
     def create_task(self):
-        dialog = NewTaskDialog(self)
-        dialog.exec_()
+        dialog_new_task = NewTaskDialog(self.db)
+        dialog_new_task.exec_()
+        self.refresh_list()
+
+    def program_settings(self):
+        self.dialog_setting = SettingsWindow(self.db)
+        self.dialog_setting.exec_()
+        # self.refresh_list()
 
     def edit_task(self):
         pass
@@ -60,9 +97,6 @@ class MainWindow(QtWidgets.QMainWindow):
             id_task = self.TaskTable.item(row, 0).text()
             self.db.deactivate_task(id_task)
             self.refresh_list()
-
-    def closeEvent(self, event):
-        pass
 
     def refresh_list(self):
 
@@ -95,6 +129,9 @@ class MainWindow(QtWidgets.QMainWindow):
         self.TaskTable.resizeColumnsToContents()
         self.TaskTable.resizeRowsToContents()
 
+    def check_task(self):
+        print('Работает!!!')
+
     def check_selected_task(self):
         row = self.TaskTable.currentRow()
         if row == -1:
@@ -106,3 +143,15 @@ class MainWindow(QtWidgets.QMainWindow):
             return False
         else:
             return True
+
+    def closeEvent(self, event):
+        pass
+        # sender = event.sender()
+        # if sender == self.trayIcon:
+        #     # Сворачиваем в трей
+        #     self.trayIcon.hide()
+        #     event.ignore()
+        # else:
+        #     # Закрываем программу
+        #     self.trayIcon.hide()
+        #     event.accept()

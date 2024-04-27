@@ -3,7 +3,7 @@ CREATE TABLE IF NOT EXISTS "TaskParametrs" (
 	"prefix_file"	TEXT NOT NULL,
 	"time"	TEXT NOT NULL,
 	"server_address"	TEXT NOT NULL,
-	"server_port"	REAL NOT NULL,
+	"server_port"	TEXT NOT NULL,
 	"db_name"	TEXT NOT NULL,
 	"user_name"	TEXT NOT NULL,
 	"type_backup"	INTEGER NOT NULL,
