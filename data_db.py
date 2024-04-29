@@ -19,6 +19,8 @@ class DataDB:
     __GET_TASK_PARAMETERS = open('SQLScripts/get_task_parameters.txt').read()
     __EDIT_TASK = open('SQLScripts/edit_task.txt').read()
     __EDIT_TASK_PARAMETERS = open('SQLScripts/edit_task_parameters.txt').read()
+    __INSERT_SCHEDULE = open('SQLScripts/insert_schedule.txt').read()
+
 
     def __init__(self):
         self.__cursor = self.__CONNECTION.cursor()
@@ -40,7 +42,8 @@ class DataDB:
             self.sql.execute(self.__CREATE_PARAMETERS, (
                 id_new_task.lastrowid, param['prefix'], param['time'], param['server_address'],
                 param['port'], param['database_name'], param['login'], param['type_backup'],
-                param['path']))
+                param['path'], param['task_cmd']))
+        return id_new_task
 
     def activate_task(self, id_task):
         with self.__CONNECTION as self.sql:
@@ -85,5 +88,12 @@ class DataDB:
             self.sql.execute(self.__EDIT_TASK_PARAMETERS,
                              (parameters_task['database_name'], parameters_task['path'], parameters_task['prefix'],
                               parameters_task['server_address'], parameters_task['port'], parameters_task['time'],
-                              str(parameters_task['type_backup']), parameters_task['login'], parameters_task['id']))
+                              str(parameters_task['type_backup']), parameters_task['login'],
+                              parameters_task['task_cmd'], parameters_task['id']))
         return
+
+    def insert_schedule(self, *schedule_data):
+        with self.__CONNECTION as self.sql:
+
+            self.sql.execute(self.__INSERT_SCHEDULE, (schedule_data['pg_path'],))
+            return

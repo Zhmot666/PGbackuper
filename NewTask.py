@@ -1,8 +1,8 @@
+import datetime
+
 from PyQt5 import uic, QtWidgets
 from PyQt5.QtCore import QTime
 from PyQt5.QtWidgets import QFileDialog
-
-import data_db
 
 
 class TaskDialog(QtWidgets.QDialog):
@@ -20,6 +20,18 @@ class TaskDialog(QtWidgets.QDialog):
         self.ChangePathButton.clicked.connect(self.changed_path)
         self.GeneratorButton.clicked.connect(self.generate_cmd)
         self.Task_id_hide.hide()
+
+        # Подключаем обработчики событий изменения для всех элементов формы
+        self.FilePrefix.textChanged.connect(self.generate_cmd)
+        self.ServerAddress.textChanged.connect(self.generate_cmd)
+        self.ServerPort.textChanged.connect(self.generate_cmd)
+        self.DataBaseName.textChanged.connect(self.generate_cmd)
+        self.UserName.textChanged.connect(self.generate_cmd)
+        self.TextFile.toggled.connect(self.generate_cmd)
+        self.Arhiv.toggled.connect(self.generate_cmd)
+        self.Folder.toggled.connect(self.generate_cmd)
+        self.TarArhiv.toggled.connect(self.generate_cmd)
+        self.ChangedPath.textChanged.connect(self.generate_cmd)
 
     def init_ui2(self):
         pass
@@ -44,6 +56,7 @@ class TaskDialog(QtWidgets.QDialog):
             elif self.TarArhiv.isChecked():
                 parameters_task['type_backup'] = 4
             parameters_task['path'] = self.ChangedPath.text()
+            parameters_task['task_cmd'] = self.CmdTask.toPlainText()
             self.save_button2(**parameters_task)
 
     def save_button2(self, **parameters_task):
@@ -51,7 +64,27 @@ class TaskDialog(QtWidgets.QDialog):
 
     def generate_cmd(self):
         settings = self.db.get_settings()
-        command_line = str(settings[1]) + '/pg_dump.exe'
+        command_line = '"' + str(settings[1]) + '/pg_dump.exe"'
+        command_line += ' -U ' + self.UserName.text()
+        command_line += ' -d ' + self.DataBaseName.text()
+        command_line += ' -h ' + self.ServerAddress.text()
+        command_line += ' -p ' + self.ServerPort.text()
+        format_archive = ''
+        ext = ''
+        if self.TextFile.isChecked():
+            format_archive = 'plain'
+            ext = '.sql'
+        elif self.Arhiv.isChecked():
+            format_archive = 'custom'
+            ext = '.arh'
+        elif self.Folder.isChecked():
+            format_archive = 'directory'
+            ext = ''
+        elif self.TarArhiv.isChecked():
+            format_archive = 'tar'
+            ext = '.tar'
+        command_line += ' -F ' + format_archive
+        command_line += ' -f ' + self.ChangedPath.text() + '/' + self.FilePrefix.text() + '-[DT]' + ext
 
         self.CmdTask.setText(command_line)
 
@@ -74,6 +107,30 @@ class TaskDialog(QtWidgets.QDialog):
         dirlist = QFileDialog.getExistingDirectory(self, "Выбрать папку", ".")
         self.ChangedPath.setText(dirlist)
 
+    def delete_schedule(self, id_task):
+        self.db.delete_schedule(id_task)
+
+    def generate_schedule(self, id_task):
+        current_date = datetime.datetime.now()
+        date_time = current_date.replace(hour=self.TimeStart.time().hour(), minute=self.TimeStart.time().minute(),
+                                         second=0, microsecond=0)
+        if date_time.time() < current_date.time():
+            start_date = current_date + datetime.timedelta(days=1)
+        else:
+            start_date = date_time
+        dates = [start_date + datetime.timedelta(days=i) for i in range(30)]
+        schedule_data = list()
+        for date in dates:
+            schedule_data.append({
+                'id_task': id_task,
+                'year': date.year,
+                'month': date.month,
+                'day': date.day,
+                'time': date.strftime('%H:%M'),
+                'status': 'Ожидает'
+            })
+        self.db.insert_schedule(*schedule_data)
+
 
 class NewTaskDialog(TaskDialog):
 
@@ -82,8 +139,10 @@ class NewTaskDialog(TaskDialog):
         self.TextFile.setChecked(True)
 
     def save_button2(self, **parameters_task):
-        self.db.add_new_task(**parameters_task)
+        id_task = self.db.add_new_task(**parameters_task)
+        self.generate_schedule(id_task)
         self.close()
+
 
 class EditTaskDialog(TaskDialog):
 
@@ -101,6 +160,7 @@ class EditTaskDialog(TaskDialog):
         self.Task_id_hide.setText(str(task_param[1]))
         list_time = task_param[3].split(':')
         self.TimeStart.setTime(QTime(int(list_time[0]), int(list_time[1]), 0))
+        self.CmdTask.setText(task_param[10])
 
         if task_param[8] == 1:
             self.TextFile.setChecked(True)
@@ -111,7 +171,7 @@ class EditTaskDialog(TaskDialog):
         elif task_param[8] == 4:
             self.TarArhiv.setChecked(True)
 
-        # 0 - Нименование +
+        # 0 - Наименование +
         # 1 - ID +
         # 2 - префикс +
         # 3 - время +
@@ -121,7 +181,10 @@ class EditTaskDialog(TaskDialog):
         # 7 - юзер +
         # 8 - тип копии
         # 9 - путь +
+        # 10 - командная строка +
 
     def save_button2(self, **parameters_task):
         self.db.edit_task_parameters(**parameters_task)
+        self.delete_schedule(self.Task_id_hide.text())
+        self.generate_schedule(self.Task_id_hide.text())
         self.close()

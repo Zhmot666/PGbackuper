@@ -6,5 +6,6 @@ SET db_name = ?,
     server_port = ?,
     "time" = ?,
     type_backup = ?,
-    user_name = ?
+    user_name = ?,
+    task_cmd = ?
 WHERE "ID_Task" = ?;

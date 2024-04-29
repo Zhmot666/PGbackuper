@@ -1,7 +1,13 @@
-CREATE TABLE IF NOT EXISTS "Schedule" (
+CREATE TABLE "Schedule" (
+	"ID_schedule"	INTEGER NOT NULL UNIQUE,
 	"ID_Task"	INTEGER NOT NULL,
-	"Month"	TEXT NOT NULL,
-	"Day"	TEXT NOT NULL,
-	"Time"	TEXT NOT NULL,
+	"Year"	INTEGER NOT NULL,
+	"Month"	INTEGER NOT NULL,
+	"Day"	INTEGER NOT NULL,
+	"PlanTime"	TEXT NOT NULL,
+	"Status"	TEXT NOT NULL,
+	"Logs"	TEXT,
+	"Archive_file"	TEXT,
+	PRIMARY KEY("ID_schedule" AUTOINCREMENT),
 	FOREIGN KEY("ID_Task") REFERENCES "TaskList"("ID")
 );
