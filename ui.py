@@ -20,7 +20,10 @@ class MainWindow(QtWidgets.QMainWindow):
         self.task_buffer = list()
         self.refresh_list()
         self.refresh_buffer()
+        self.refresh_future_task()
         self.statusBar().showMessage('Ожидание...')
+        self.resize(910, 360)
+        self.setFixedSize(910, 360)
 
         # Многопоточность
         self.CopyTask = run_copy.RunCopy()  # Создаем экземпляр класса для отдельного потока копирования
@@ -36,10 +39,11 @@ class MainWindow(QtWidgets.QMainWindow):
         self.EditTaskButton.clicked.connect(self.edit_task)
         self.SettingsButton.clicked.connect(self.program_settings)
         self.StartTaskButton.clicked.connect(self.start_task_button)
+        self.ResizeButton.clicked.connect(self.resize_window)
 
         # Таймер для проверки задач и начала копирования
         self.timer = QTimer()
-        self.timer.setInterval(10000)  # 60000 миллисекунд = 1 минута
+        self.timer.setInterval(60000)  # 60000 миллисекунд = 1 минута
         self.timer.timeout.connect(self.check_task)
         self.timer.timeout.connect(self.start_task)
         self.timer.start()
@@ -168,10 +172,11 @@ class MainWindow(QtWidgets.QMainWindow):
             self.BufferTable.setItem(row, 0, QtWidgets.QTableWidgetItem(str(task['id_task'])))
             self.BufferTable.setItem(row, 1, QtWidgets.QTableWidgetItem(str(task['id_schedule'])))
             self.BufferTable.setItem(row, 2, QtWidgets.QTableWidgetItem(task['status']))
+        self.TaskFutureTable.resizeRowsToContents()
 
     def start_task_button(self):
         if self.check_selected_task():
-            print('Получаем id задачи и строку команды из таблицы задач')
+            # print('Получаем id задачи и строку команды из таблицы задач')
             row = self.TaskTable.currentRow()
             id_task = self.TaskTable.item(row, 0).text()
             command = self.TaskTable.item(row, 5).text()
@@ -179,12 +184,12 @@ class MainWindow(QtWidgets.QMainWindow):
             id_schedule = None
             self.statusBar().showMessage('Идет архивирование (Задача ' + task_name + ')')
 
-            print('Запускаем консольную команду в отдельном потоке')
+            # print('Запускаем консольную команду в отдельном потоке')
             self.CopyTask.set_params(id_task, command, id_schedule)
             self.CopyTask.start()
 
     def check_task(self):
-        print('Поиск подходящих задач')
+        # print('Поиск подходящих задач')
         result = self.db.get_schedule()
         if result is None:
             return
@@ -204,30 +209,31 @@ class MainWindow(QtWidgets.QMainWindow):
             if task['status'] == 'Завершено':
                 self.task_buffer.remove(task)
         self.refresh_buffer()
+        self.refresh_future_task()
 
     def start_task(self):
-        print('Получаем первую задачу из буфера, которая находится в статусе "Ожидает"')
+        # print('Получаем первую задачу из буфера, которая находится в статусе "Ожидает"')
 
         task = next((task for task in self.task_buffer if task['status'] == 'Ожидает'), None)
         if not task:
-            print('Нет подходящих задач')
+            # print('Нет подходящих задач')
             return
 
-        print('Получаем id задачи и строку команды из таблицы задач')
-        print('Всего задач: ' + str(len(self.task_buffer)))
+        # print('Получаем id задачи и строку команды из таблицы задач')
+        # print('Всего задач: ' + str(len(self.task_buffer)))
         id_task = task['id_task']
         id_schedule = task['id_schedule']
         task_name = task['name']
         command = self.db.get_command(id_task)
 
-        print('Запускаем консольную команду в отдельном потоке')
-        print('Копируем информацию id_task = ' + str(id_task) + ' id_schedule = ' + str(id_schedule))
+        # print('Запускаем консольную команду в отдельном потоке')
+        # print('Копируем информацию id_task = ' + str(id_task) + ' id_schedule = ' + str(id_schedule))
         self.CopyTask.set_params(id_task, command[0], id_schedule)
         self.CopyTask.start()
 
         self.statusBar().showMessage('Идет архивирование (Задача ' + task_name + ')')
 
-        print('Обновляем статус задачи')
+        # print('Обновляем статус задачи')
         for task in self.task_buffer:
             if task['id_task'] == id_task and task['id_schedule'] == id_schedule:
                 task['status'] = 'Выполняется'
@@ -237,7 +243,7 @@ class MainWindow(QtWidgets.QMainWindow):
 
     def on_finished(self, param_dict):
 
-        print('Обновляем статус задачи')
+        # print('Обновляем статус задачи')
         if param_dict['id_schedule'] == 0:
             pass  # TODO: надо обозначить внеплановую копию
         else:
@@ -247,7 +253,7 @@ class MainWindow(QtWidgets.QMainWindow):
                 if task['id_task'] == param_dict['id_task'] and task['id_schedule'] == param_dict['id_schedule']:
                     task['status'] = 'Завершено'
 
-        print('Завершение копирования')
+        # print('Завершение копирования')
         self.statusBar().showMessage('Ожидание...')
 
     def check_selected_task(self):
@@ -262,6 +268,39 @@ class MainWindow(QtWidgets.QMainWindow):
         else:
             return True
 
+    def resize_window(self):
+        if self.ResizeButton.text() == "<-":
+            self.resize(910, 360)
+            self.setFixedSize(910, 360)
+            self.ResizeButton.setText("->")
+        else:
+            self.resize(1380, 360)
+            self.setFixedSize(1380, 360)
+            self.ResizeButton.setText("<-")
+
+    def refresh_future_task(self):
+        self.TaskFutureTable.clear()
+        self.TaskFutureTable.setColumnCount(3)
+        self.TaskFutureTable.horizontalHeader().setSectionResizeMode(1, QtWidgets.QHeaderView.Stretch)
+        self.TaskFutureTable.setHorizontalHeaderLabels(['Наименование', 'Дата', 'Время'])
+        self.TaskFutureTable.setEditTriggers(QtWidgets.QAbstractItemView.NoEditTriggers)
+        self.TaskFutureTable.setSelectionBehavior(QtWidgets.QAbstractItemView.SelectRows)
+        self.TaskFutureTable.setAlternatingRowColors(True)
+        self.TaskFutureTable.setSelectionMode(QtWidgets.QAbstractItemView.SingleSelection)
+        self.TaskFutureTable.setShowGrid(True)
+        self.TaskFutureTable.setSortingEnabled(False)
+
+        self.TaskFutureTable.setRowCount(0)
+        result = self.db.get_future_tasks()
+        for task in result:
+            row = self.TaskFutureTable.rowCount()
+            self.TaskFutureTable.insertRow(row)
+            self.TaskFutureTable.setItem(row, 0, QtWidgets.QTableWidgetItem(task[4]))
+            self.TaskFutureTable.setItem(row, 1, QtWidgets.QTableWidgetItem(self.attache_zero(task[2])+':' +
+                                                                    self.attache_zero(task[1])+':'+str(task[0])))
+            self.TaskFutureTable.setItem(row, 2, QtWidgets.QTableWidgetItem(str(task[3])))
+        self.TaskFutureTable.resizeRowsToContents()
+
     def closeEvent(self, event):
         pass
         # sender = event.sender()
@@ -273,3 +312,10 @@ class MainWindow(QtWidgets.QMainWindow):
         #     # Закрываем программу
         #     self.trayIcon.hide()
         #     event.accept()
+
+    @staticmethod
+    def attache_zero(param):
+        if param < 10:
+            return '0' + str(param)
+        else:
+            return str(param)

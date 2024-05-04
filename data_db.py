@@ -26,6 +26,7 @@ class DataDB:
     __EDIT_SCHEDULE_STATUS = open('SQLScripts/edit_schedule_status.txt').read()
     __GET_COMMAND = open('SQLScripts/get_command.txt').read()
     __SET_SCHEDULE_TIME = open('SQLScripts/set_schedule_time.txt').read()
+    __GET_FUTURE_TASKS = open('SQLScripts/get_future_tasks.txt').read()
 
     def __init__(self):
         self.__cursor = self.__CONNECTION.cursor()
@@ -145,3 +146,25 @@ class DataDB:
         with self.__CONNECTION as self.sql:
             self.sql.execute("CALL UpdateScheduleTime(?, ?, ?)", (id_schedule, time, start_stop))
         return
+
+    def get_future_tasks(self):
+        with self.__CONNECTION as self.sql:
+            result = self.sql.execute('''
+            SELECT Schedule.Year, 
+                    Schedule.Month, 
+                    Schedule.Day,
+                    Schedule.PlanTime, 
+                    TaskList.Name_Task
+            FROM Schedule
+            JOIN TaskList ON Schedule.ID_Task = TaskList.ID
+            WHERE
+                Schedule.Status = 'Ожидает'
+                AND TaskList.Active = 'Активно'
+                AND TaskList.Deleted <> 'Удалено'
+            ORDER BY
+                Schedule.Year ASC,
+                Schedule.Month ASC,
+                Schedule.Day ASC,
+                Schedule.PlanTime ASC
+            LIMIT 6;''')
+        return result.fetchall()

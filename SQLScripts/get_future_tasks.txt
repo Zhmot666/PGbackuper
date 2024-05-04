@@ -1,0 +1,21 @@
+SELECT
+    Schedule.Year,
+    Schedule.Month,
+    Schedule.Day,
+    Schedule.PlanTime,
+    TaskList.Name_Task
+FROM
+    Schedule
+JOIN
+    TaskList ON Schedule.ID_Task = TaskList.ID
+WHERE
+    Schedule.Status = 'Ожидает'
+    AND TaskList.Active = 'Активно'
+    AND TaskList.Deleted <> 'Удалено'
+ORDER BY
+    Schedule.Year ASC,
+    Schedule.Month ASC,
+    Schedule.Day ASC,
+    Schedule.PlanTime ASC
+LIMIT
+    6;
