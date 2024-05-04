@@ -6,12 +6,16 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>762</width>
-    <height>371</height>
+    <width>1393</width>
+    <height>359</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>MainWindow</string>
+  </property>
+  <property name="windowIcon">
+   <iconset>
+    <normaloff>../icon.png</normaloff>../icon.png</iconset>
   </property>
   <widget class="QWidget" name="centralwidget">
    <widget class="QTableWidget" name="TaskTable">
@@ -52,8 +56,8 @@
    <widget class="QPushButton" name="CreateTaskButton">
     <property name="geometry">
      <rect>
-      <x>20</x>
-      <y>290</y>
+      <x>780</x>
+      <y>10</y>
       <width>91</width>
       <height>24</height>
      </rect>
@@ -65,8 +69,8 @@
    <widget class="QPushButton" name="ActiveTaskButton">
     <property name="geometry">
      <rect>
-      <x>400</x>
-      <y>290</y>
+      <x>780</x>
+      <y>140</y>
       <width>91</width>
       <height>24</height>
      </rect>
@@ -78,8 +82,8 @@
    <widget class="QPushButton" name="DeactivTaskButton">
     <property name="geometry">
      <rect>
-      <x>500</x>
-      <y>290</y>
+      <x>780</x>
+      <y>170</y>
       <width>91</width>
       <height>24</height>
      </rect>
@@ -104,8 +108,8 @@
    <widget class="QPushButton" name="DeleteTaskButton">
     <property name="geometry">
      <rect>
-      <x>220</x>
-      <y>290</y>
+      <x>780</x>
+      <y>80</y>
       <width>91</width>
       <height>24</height>
      </rect>
@@ -117,8 +121,8 @@
    <widget class="QPushButton" name="EditTaskButton">
     <property name="geometry">
      <rect>
-      <x>110</x>
-      <y>290</y>
+      <x>780</x>
+      <y>40</y>
       <width>91</width>
       <height>24</height>
      </rect>
@@ -127,17 +131,40 @@
      <string>Изменить</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="PushButtonSettings">
+   <widget class="QPushButton" name="SettingsButton">
     <property name="geometry">
      <rect>
-      <x>320</x>
+      <x>20</x>
       <y>290</y>
-      <width>41</width>
+      <width>91</width>
       <height>24</height>
      </rect>
     </property>
     <property name="text">
-     <string>Настр</string>
+     <string>Настройки</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="StartTaskButton">
+    <property name="geometry">
+     <rect>
+      <x>780</x>
+      <y>240</y>
+      <width>91</width>
+      <height>24</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Запустить</string>
+    </property>
+   </widget>
+   <widget class="QTableWidget" name="BufferTable">
+    <property name="geometry">
+     <rect>
+      <x>920</x>
+      <y>10</y>
+      <width>451</width>
+      <height>261</height>
+     </rect>
     </property>
    </widget>
   </widget>
@@ -146,7 +173,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>762</width>
+     <width>1393</width>
      <height>22</height>
     </rect>
    </property>

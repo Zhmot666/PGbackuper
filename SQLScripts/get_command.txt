@@ -1,0 +1,1 @@
+select task_cmd from TaskParameters where ID_Task = ?;

@@ -1,4 +1,7 @@
-CREATE TABLE IF NOT EXISTS "Settings" (
-	"ID_setting"	INTEGER NOT NULL,
-	"pg_path"	TEXT
-);
+CREATE TABLE IF NOT EXISTS "Settings"
+    (
+    "ID_setting" INTEGER NOT NULL,
+    "pg_path" TEXT,
+     "first_run" INTEGER NOT NULL,
+     "last_run" TEXT
+     );

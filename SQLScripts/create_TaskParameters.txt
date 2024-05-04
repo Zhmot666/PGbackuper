@@ -9,5 +9,6 @@ CREATE TABLE IF NOT EXISTS "TaskParameters" (
 	"type_backup"	INTEGER NOT NULL,
 	"path_backup"	TEXT NOT NULL,
 	"task_cmd"	TEXT NOT NULL,
+	"log" INTEGER NOT NULL,
 	FOREIGN KEY("ID_Task") REFERENCES "TaskList"("ID")
 );

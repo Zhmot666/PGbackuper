@@ -1,0 +1,11 @@
+SELECT Schedule.ID_schedule, Schedule.ID_Task, TaskList.Name_Task
+FROM Schedule
+JOIN TaskList ON Schedule.ID_Task = TaskList.ID
+WHERE
+        Schedule.Year = ?
+    AND Schedule.Month = ?
+    AND Schedule.Day = ?
+    AND Schedule.PlanTime = ?
+    AND Schedule.Status = ?
+    AND TaskList.Active = 'Активно'
+    AND TaskList.Deleted <> 'Удалено';

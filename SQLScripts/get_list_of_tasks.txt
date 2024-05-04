@@ -1,1 +1,12 @@
-SELECT * FROM TaskList WHERE Deleted <> ? AND Active <> ?
+SELECT
+  TaskList.ID,
+  TaskList.Name_task,
+  TaskList.Deleted,
+  TaskList.Active,
+  TaskParameters.time,
+  TaskParameters.task_cmd
+FROM TaskList
+JOIN TaskParameters
+  ON TaskList.ID = TaskParameters.ID_task
+WHERE
+  TaskList.Deleted <> ? AND TaskList.Active <> ?;

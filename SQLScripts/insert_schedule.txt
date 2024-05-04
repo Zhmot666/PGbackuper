@@ -1,0 +1,1 @@
+INSERT INTO Schedule(ID_Task, Year, Month, Day, PlanTime, Status) VALUES (?, ?, ?, ?, ?, ?);

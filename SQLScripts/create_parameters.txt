@@ -8,5 +8,6 @@ INSERT INTO "TaskParameters"
         "user_name",
         "type_backup",
         "path_backup",
-        "task_cmd")
-VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
+        "task_cmd",
+        "log")
+VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);

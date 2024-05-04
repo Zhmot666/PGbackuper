@@ -1,0 +1,12 @@
+CREATE PROCEDURE UpdateScheduleTime(
+  IN ID_schedule INT,
+  IN Time TIME,
+  IN TimeType VARCHAR(10)
+)
+BEGIN
+  IF TimeType = 'Начало' THEN
+    UPDATE Schedule SET StartTime = Time WHERE ID_schedule = ID_schedule;
+  ELSEIF TimeType = 'Окончание' THEN
+    UPDATE Schedule SET StopTime = Time WHERE ID_schedule = ID_schedule;
+  END IF;
+END;

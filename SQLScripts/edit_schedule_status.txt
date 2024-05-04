@@ -1,0 +1,1 @@
+update "Schedule" set "Status" = ?, "StartTime" = ?, "StopTime" = ? where ID_schedule = ?;

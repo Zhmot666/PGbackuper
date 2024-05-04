@@ -12,7 +12,7 @@ class TaskDialog(QtWidgets.QDialog):
         self.id_task = id_task
         self.db = db
         self.init_ui()
-        self.init_ui2()
+        # self.init_ui2()
 
     def init_ui(self):
         self.CancelButton.clicked.connect(self.cancel_button)
@@ -32,9 +32,10 @@ class TaskDialog(QtWidgets.QDialog):
         self.Folder.toggled.connect(self.generate_cmd)
         self.TarArhiv.toggled.connect(self.generate_cmd)
         self.ChangedPath.textChanged.connect(self.generate_cmd)
+        self.LogCheck.stateChanged.connect(self.generate_cmd)
 
-    def init_ui2(self):
-        pass
+    # def init_ui2(self):
+    #     pass
 
     def save_button(self):
         if self.check_task():
@@ -57,10 +58,12 @@ class TaskDialog(QtWidgets.QDialog):
                 parameters_task['type_backup'] = 4
             parameters_task['path'] = self.ChangedPath.text()
             parameters_task['task_cmd'] = self.CmdTask.toPlainText()
-            self.save_button2(**parameters_task)
+            parameters_task['log'] = 1 if self.LogCheck.isChecked() else 0
+            return parameters_task
 
-    def save_button2(self, **parameters_task):
-        pass
+
+    # def save_button2(self, **parameters_task):
+    #     pass
 
     def generate_cmd(self):
         settings = self.db.get_settings()
@@ -85,6 +88,8 @@ class TaskDialog(QtWidgets.QDialog):
             ext = '.tar'
         command_line += ' -F ' + format_archive
         command_line += ' -f ' + self.ChangedPath.text() + '/' + self.FilePrefix.text() + '-[DT]' + ext
+        if self.LogCheck.isChecked():
+            command_line += ' -v'
 
         self.CmdTask.setText(command_line)
 
@@ -122,11 +127,11 @@ class TaskDialog(QtWidgets.QDialog):
         schedule_data = list()
         for date in dates:
             schedule_data.append({
-                'id_task': id_task,
+                'id_task': int(id_task),
                 'year': date.year,
                 'month': date.month,
                 'day': date.day,
-                'time': date.strftime('%H:%M'),
+                'plan_time': date_time.strftime("%H:%M"),
                 'status': 'Ожидает'
             })
         self.db.insert_schedule(*schedule_data)
@@ -134,19 +139,22 @@ class TaskDialog(QtWidgets.QDialog):
 
 class NewTaskDialog(TaskDialog):
 
-    def init_ui2(self):
+    def init_ui(self):
+        super().init_ui()
         self.NameTask.setFocus()
         self.TextFile.setChecked(True)
 
-    def save_button2(self, **parameters_task):
+    def save_button(self):
+        parameters_task = super().save_button()
         id_task = self.db.add_new_task(**parameters_task)
-        self.generate_schedule(id_task)
+        self.generate_schedule(id_task.lastrowid)
         self.close()
 
 
 class EditTaskDialog(TaskDialog):
 
-    def init_ui2(self):
+    def init_ui(self):
+        super().init_ui()
         self.Label_NewTask.setText('Редактировать задание')
         task_param = self.db.get_task_parameters(self.id_task)
         # for param in task_param:
@@ -161,6 +169,7 @@ class EditTaskDialog(TaskDialog):
         list_time = task_param[3].split(':')
         self.TimeStart.setTime(QTime(int(list_time[0]), int(list_time[1]), 0))
         self.CmdTask.setText(task_param[10])
+        self.LogCheck.setChecked(True if task_param[11] == 1 else False)
 
         if task_param[8] == 1:
             self.TextFile.setChecked(True)
@@ -183,7 +192,8 @@ class EditTaskDialog(TaskDialog):
         # 9 - путь +
         # 10 - командная строка +
 
-    def save_button2(self, **parameters_task):
+    def save_button(self):
+        parameters_task = super().save_button()
         self.db.edit_task_parameters(**parameters_task)
         self.delete_schedule(self.Task_id_hide.text())
         self.generate_schedule(self.Task_id_hide.text())
