@@ -33,9 +33,7 @@ class TaskDialog(QtWidgets.QDialog):
         self.TarArhiv.toggled.connect(self.generate_cmd)
         self.ChangedPath.textChanged.connect(self.generate_cmd)
         self.LogCheck.stateChanged.connect(self.generate_cmd)
-
-    # def init_ui2(self):
-    #     pass
+        self.BlobCheck.stateChanged.connect(self.generate_cmd)
 
     def save_button(self):
         if self.check_task():
@@ -59,11 +57,8 @@ class TaskDialog(QtWidgets.QDialog):
             parameters_task['path'] = self.ChangedPath.text()
             parameters_task['task_cmd'] = self.CmdTask.toPlainText()
             parameters_task['log'] = 1 if self.LogCheck.isChecked() else 0
+            parameters_task['blobs'] = 1 if self.BlobCheck.isChecked() else 0
             return parameters_task
-
-
-    # def save_button2(self, **parameters_task):
-    #     pass
 
     def generate_cmd(self):
         settings = self.db.get_settings()
@@ -72,6 +67,8 @@ class TaskDialog(QtWidgets.QDialog):
         command_line += ' -d ' + self.DataBaseName.text()
         command_line += ' -h ' + self.ServerAddress.text()
         command_line += ' -p ' + self.ServerPort.text()
+        if self.BlobCheck.isChecked():
+            command_line += ' -b'
         format_archive = ''
         ext = ''
         if self.TextFile.isChecked():
@@ -170,6 +167,7 @@ class EditTaskDialog(TaskDialog):
         self.TimeStart.setTime(QTime(int(list_time[0]), int(list_time[1]), 0))
         self.CmdTask.setText(task_param[10])
         self.LogCheck.setChecked(True if task_param[11] == 1 else False)
+        self.BlobCheck.setChecked(True if task_param[12] == 1 else False)
 
         if task_param[8] == 1:
             self.TextFile.setChecked(True)

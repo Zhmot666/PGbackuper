@@ -10,5 +10,6 @@ CREATE TABLE IF NOT EXISTS "TaskParameters" (
 	"path_backup"	TEXT NOT NULL,
 	"task_cmd"	TEXT NOT NULL,
 	"log" INTEGER NOT NULL,
+	"blobs"	INTEGER NOT NULL DEFAULT 1,
 	FOREIGN KEY("ID_Task") REFERENCES "TaskList"("ID")
 );

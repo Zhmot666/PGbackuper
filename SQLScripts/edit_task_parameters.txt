@@ -8,5 +8,6 @@ SET db_name = ?,
     type_backup = ?,
     user_name = ?,
     task_cmd = ?,
-    log = ?
+    log = ?,
+    blobs = ?
 WHERE "ID_Task" = ?;

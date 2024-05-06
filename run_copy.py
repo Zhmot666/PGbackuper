@@ -1,7 +1,6 @@
-import os
 import subprocess
 import datetime
-from PyQt5.QtCore import QThread, pyqtSignal, QObject
+from PyQt5.QtCore import QThread, pyqtSignal
 
 
 class RunCopy(QThread):
@@ -37,6 +36,7 @@ class RunCopy(QThread):
         self.param_dict['return_code'] = result.returncode
         self.param_dict['id_task'] = self.id_task
         self.param_dict['id_schedule'] = self.id_schedule
+        self.param_dict['log'] = output
         self.finished.emit(self.param_dict)
 
     @staticmethod

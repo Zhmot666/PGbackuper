@@ -9,5 +9,6 @@ INSERT INTO "TaskParameters"
         "type_backup",
         "path_backup",
         "task_cmd",
-        "log")
-VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
+        "log",
+        "blobs")
+VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);

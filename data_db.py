@@ -51,7 +51,7 @@ class DataDB:
             self.sql.execute(self.__CREATE_PARAMETERS, (
                 id_new_task.lastrowid, param['prefix'], param['time'], param['server_address'],
                 param['port'], param['database_name'], param['login'], param['type_backup'],
-                param['path'], param['task_cmd'], param['log']))
+                param['path'], param['task_cmd'], param['log'], param['blobs']))
         return id_new_task
 
     def activate_task(self, id_task):
@@ -115,7 +115,8 @@ class DataDB:
                              (parameters_task['database_name'], parameters_task['path'], parameters_task['prefix'],
                               parameters_task['server_address'], parameters_task['port'], parameters_task['time'],
                               str(parameters_task['type_backup']), parameters_task['login'],
-                              parameters_task['task_cmd'], parameters_task['log'], parameters_task['id']))
+                              parameters_task['task_cmd'], parameters_task['log'], parameters_task['blobs'],
+                              parameters_task['id']))
         return
 
     def insert_schedule(self, *schedule_data):
