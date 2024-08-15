@@ -1,0 +1,127 @@
+body {
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+h1 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    border: 1px solid #ddd;
+    padding: 5px;
+}
+
+th {
+    text-align: center;
+}
+
+#button-column {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+button {
+    width: 100%;
+    padding: 5px;
+    margin: 5px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.grid {
+    display: grid;
+    grid-gap: 10px;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    grid-auto-rows: 20px;
+}
+
+.selected {
+    background-color: #f5f5f5;
+}
+
+.content {
+    flex-direction: row;
+    display: flex;
+    width: 100%;
+    border: 1px solid #000;
+}
+
+.LeftColumn {
+    flex-direction: column;
+    display: flex;
+    width: 45%;
+    height: 100%;
+    background-color: #f5f5f5;
+    padding: 10px;
+    border: 1px solid #000;
+}
+
+.ButtonColumn {
+    flex-direction: column;
+    display: flex;
+    width: 10%;
+    height: 100%;
+    background-color: #f5f5f5;
+    padding: 10px;
+    border: 1px solid #000;
+    justify-content: center;
+}
+
+.ButtonColumn button:nth-child(1) {
+    margin-bottom: 5px;
+}
+
+.ButtonColumn button:nth-child(2) {
+    margin-bottom: 30px;
+}
+
+.ButtonColumn button:nth-child(3) {
+    margin-bottom: 30px;
+}
+
+.ButtonColumn button:nth-child(4) {
+    margin-bottom: 5px;
+}
+
+.ButtonColumn button:nth-child(5) {
+    margin-bottom: 30px;
+}
+
+
+.RightColumn {
+    flex-direction: column;
+    display: flex;
+    width: 45%;
+    height: 100%;
+    background-color: #f5f5f5;
+    padding: 10px;
+}
+
+.TaskForm {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
+    box-shadow: 0px 0px 5px #000;
+
+    .form-group {
+        border: 1px solid #000;
+        background-color: #f5f5f5;
+    }
+}

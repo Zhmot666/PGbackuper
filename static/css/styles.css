@@ -1,0 +1,72 @@
+.content {
+    flex-direction: row;
+    display: flex;
+    width: 100%;
+    border: 1px solid #000;
+}
+
+.LeftColumn {
+    flex-direction: column;
+    display: flex;
+    width: 45%;
+    height: 100%;
+    background-color: #f5f5f5;
+    padding: 10px;
+    border: 1px solid #000;
+}
+
+.ButtonColumn {
+    flex-direction: column;
+    display: flex;
+    width: 10%;
+    height: 100%;
+    background-color: #f5f5f5;
+    padding: 10px;
+    border: 1px solid #000;
+    justify-content: center;
+}
+
+.ButtonColumn button:nth-child(1) {
+    margin-bottom: 5px;
+}
+
+.ButtonColumn button:nth-child(2) {
+    margin-bottom: 30px;
+}
+
+.ButtonColumn button:nth-child(3) {
+    margin-bottom: 30px;
+}
+
+.ButtonColumn button:nth-child(4) {
+    margin-bottom: 5px;
+}
+
+.ButtonColumn button:nth-child(5) {
+    margin-bottom: 30px;
+}
+
+
+.RightColumn {
+    flex-direction: column;
+    display: flex;
+    width: 45%;
+    height: 100%;
+    background-color: #f5f5f5;
+    padding: 10px;
+}
+
+.TaskForm {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
+    box-shadow: 0px 0px 5px #000;
+
+    .form-group {
+        border: 1px solid #000;
+        background-color: #f5f5f5;
+    }
+}
